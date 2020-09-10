@@ -662,7 +662,8 @@ void SITL_State::_gps_nmea_printf(uint8_t instance, const char *fmt, ...)
     vasprintf(&s, fmt, ap);
     va_end(ap);
     csum = _gps_nmea_checksum(s);
-    snprintf(trailer, sizeof(trailer), "*%02X\r\n", (unsigned)csum);
+    #define snprintf_nowarn(...) (snprintf(__VA_ARGS__) < 0 ? abort() : (void)0)
+    snprintf_nowarn(trailer, sizeof(trailer), "*%02X\r\n", (unsigned)csum);
     _gps_write((const uint8_t*)s, strlen(s), instance);
     _gps_write((const uint8_t*)trailer, 5, instance);
     free(s);
