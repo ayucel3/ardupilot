@@ -18,12 +18,10 @@ def set_simulation_source_system():
 	time.sleep(20)
 	mav_proxy.kill()
 	
-
-
 def new_vehicle_simulation():
 	global VEHICLE_COUNTER, START_ID
 	print("===============Sumulation #"+ str(VEHICLE_COUNTER) + " starting...===============")
-	simulation = subprocess.Popen(("python ./Tools/autotest/sim_vehicle.py -v ArduCopter -f quad --no-mavproxy --sysid=" + str(START_ID+VEHICLE_COUNTER) + " --instance=" + str(START_ID+VEHICLE_COUNTER) ).split())
+	simulation = subprocess.Popen(("python ./Tools/autotest/sim_vehicle.py -v ArduCopter -f quad --no-mavproxy --instance=" + str(START_ID+VEHICLE_COUNTER) ).split())
 	print("===============Sumulation #"+ str(VEHICLE_COUNTER) + " started===============")
 	set_simulation_source_system()
 	return simulation
@@ -61,5 +59,7 @@ def main():
 		print ""
 	for vehicle in vehicles:
 		vehicle[1].kill()
+	os.system('killall -9 xterm')
 
 main()
+
