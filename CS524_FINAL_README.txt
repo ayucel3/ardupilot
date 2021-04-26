@@ -16,7 +16,7 @@ PREREQUISITES:
 	8. Clone final project Repo
 		$ git clone https://github.com/jburns11/ardupilot
 	9. Enter Directory
-		$ cd arducopter
+		$ cd ardupilot
 	10. Get submodules
 		$ git submodule update --init --recursive
 	11. Install ardupilot prereqs
@@ -29,6 +29,13 @@ PREREQUISITES:
 		$ ./waf build --board=sitl
 	15. Now you can start the multi vehicle simulation
 		$ python vehicle_connect.py
+    16. Set up the permissions to access serial devices
+        $ sudo usermod -a -G dialout $USER
+    17. Remove modemmanager
+        $ sudo apt-get remove modemmanager
+    17. Now Start the Simulation
+        $ ./QGroundControl.AppImage
+        
 	
 
 FILES:
